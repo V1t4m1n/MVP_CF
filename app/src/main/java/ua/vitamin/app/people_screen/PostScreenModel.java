@@ -2,16 +2,10 @@ package ua.vitamin.app.people_screen;
 
 import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,18 +15,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import ua.vitamin.app.people_screen.utils.RequestHandler;
 import ua.vitamin.app.utils.Result;
 
-public class PostScreenModel implements Contract.MainModel {
-
-    private String responseString;
-    private String url;
-    private HttpsURLConnection connection;
-    private BufferedReader bufferedReader;
-    private StringBuilder sb;
-    private InputStream inputStream;
-    private List<Result> peopleList;
+public class PostScreenModel implements PeopleScreenContract.MainModel {
 
     @Override
-    public List<Result> loadPeople() {
+    public CompletableFuture<Void> fetchPeopleList() {
+        final List<Result>[] peopleList = new List[]{Collections.emptyList()};
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://randomuser.me/")
@@ -46,7 +33,7 @@ public class PostScreenModel implements Contract.MainModel {
             call.enqueue(new Callback<List<Result>>() {
                 @Override
                 public void onResponse(Call<List<Result>> call, Response<List<Result>> response) {
-                    peopleList = response.body();
+                    peopleList[0] = response.body();
                 }
 
                 @Override
@@ -57,12 +44,6 @@ public class PostScreenModel implements Contract.MainModel {
             });
         });
 
-        try {
-            resultCompletableFuture.get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        return peopleList;
+        return resultCompletableFuture;
     }
 }

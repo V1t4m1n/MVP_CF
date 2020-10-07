@@ -1,10 +1,11 @@
 package ua.vitamin.app.people_screen;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import ua.vitamin.app.utils.Result;
 
-public interface Contract {
+public interface PeopleScreenContract {
     public interface MainView {
         public void onShowListPeople(List<Result> listPeople);
     }
@@ -14,6 +15,6 @@ public interface Contract {
     }
 
     public interface MainModel {
-        public List<Result> loadPeople();
+        public CompletableFuture<Void> fetchPeopleList();
     }
 }

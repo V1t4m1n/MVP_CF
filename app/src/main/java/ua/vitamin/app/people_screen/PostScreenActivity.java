@@ -11,9 +11,9 @@ import java.util.List;
 import ua.vitamin.redditapp.R;
 import ua.vitamin.app.utils.Result;
 
-public class PostScreenActivity extends AppCompatActivity implements Contract.MainView {
+public class PostScreenActivity extends AppCompatActivity implements PeopleScreenContract.MainView {
 
-    private Contract.MainPresenter mainPresenter;
+    private PeopleScreenContract.MainPresenter mainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
