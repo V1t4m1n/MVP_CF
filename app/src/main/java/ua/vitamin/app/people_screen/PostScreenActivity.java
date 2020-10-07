@@ -23,15 +23,15 @@ public class PostScreenActivity extends AppCompatActivity implements Contract.Ma
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mainPresenter.onPostListLoad();
+    }
+
+    @Override
     public void onShowListPeople(List<Result> listPeople) {
         Log.d("LIST", listPeople.get(0).getEmail());
         TextView textView = findViewById(R.id.textView);
         textView.setText(listPeople.get(0).getEmail());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mainPresenter.onPostListLoad();
     }
 }

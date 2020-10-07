@@ -33,7 +33,6 @@ public class PostScreenModel implements Contract.MainModel {
 
     @Override
     public List<Result> loadPeople() {
-        Executor executor = Executors.newFixedThreadPool(10);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://randomuser.me/")
@@ -53,10 +52,10 @@ public class PostScreenModel implements Contract.MainModel {
                 @Override
                 public void onFailure(Call<List<Result>> call, Throwable t) {
                     t.printStackTrace();
-                    Log.d("ERRRROOOORRR", Objects.requireNonNull(t.getLocalizedMessage()));
+                    Log.d("PostScreenModel.loadPeople", Objects.requireNonNull(t.getLocalizedMessage()));
                 }
             });
-        }, executor);
+        });
 
         try {
             resultCompletableFuture.get();
