@@ -16,6 +16,7 @@ public class PeopleScreenPresenter implements PeopleScreenContract.MainPresenter
     public PeopleScreenPresenter (PeopleScreenContract.MainView mainActivity) {
         Log.d(TAG, "PeopleScreenPresenter()");
         this.postScreenActivityView = mainActivity;
+        this.postScreenModel = new PostScreenModel();
     }
 
     public PeopleScreenPresenter (PeopleScreenContract.MainModel mainModel) {
@@ -33,11 +34,7 @@ public class PeopleScreenPresenter implements PeopleScreenContract.MainPresenter
     @Override
     public void onPostListLoad() {
         Log.d(TAG, "onPostListLoad()");
-        peopleList = (List<Result>) postScreenModel.fetchPeopleList().handleAsync((aVoid, throwable) -> {postScreenActivityView.onShowListPeople(peopleList); return peopleList;});
-        postScreenActivityView.onShowListPeople(peopleList);
-    }
-
-    public void loadPeople() {
-        this.peopleList = (List<Result>) postScreenModel.fetchPeopleList().handleAsync((aVoid, throwable) -> {postScreenActivityView.onShowListPeople(peopleList); return peopleList;});
+        postScreenModel.fetchPeopleList().handleAsync((aVoid, throwable) -> {postScreenActivityView.onShowListPeople(peopleList); return this;});
+        //postScreenActivityView.onShowListPeople(peopleList);
     }
 }

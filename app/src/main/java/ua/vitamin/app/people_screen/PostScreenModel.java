@@ -17,9 +17,10 @@ import ua.vitamin.app.utils.Result;
 
 public class PostScreenModel implements PeopleScreenContract.MainModel {
 
+   private List<Result> peopleList;
+
     @Override
     public CompletableFuture<Void> fetchPeopleList() {
-        final List<Result>[] peopleList = new List[]{Collections.emptyList()};
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://randomuser.me/")
@@ -33,7 +34,7 @@ public class PostScreenModel implements PeopleScreenContract.MainModel {
             call.enqueue(new Callback<List<Result>>() {
                 @Override
                 public void onResponse(Call<List<Result>> call, Response<List<Result>> response) {
-                    peopleList[0] = response.body();
+                    peopleList = response.body();
                 }
 
                 @Override
