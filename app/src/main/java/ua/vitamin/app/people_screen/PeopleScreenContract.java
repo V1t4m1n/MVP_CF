@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import ua.vitamin.app.utils.Result;
+import ua.vitamin.app.utils.User;
 
 public interface PeopleScreenContract {
     public interface MainView {
@@ -15,6 +16,6 @@ public interface PeopleScreenContract {
     }
 
     public interface MainModel {
-        public CompletableFuture<Void> fetchPeopleList();
+        public CompletableFuture<User> fetchPeopleList();
     }
 }

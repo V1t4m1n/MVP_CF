@@ -35,6 +35,5 @@ public class PeopleScreenPresenter implements PeopleScreenContract.MainPresenter
     public void onPostListLoad() {
         Log.d(TAG, "onPostListLoad()");
         postScreenModel.fetchPeopleList().handleAsync((aVoid, throwable) -> {postScreenActivityView.onShowListPeople(peopleList); return this;});
-        //postScreenActivityView.onShowListPeople(peopleList);
     }
 }
