@@ -33,6 +33,5 @@ public class PostScreenActivity extends AppCompatActivity implements PeopleScree
         TextView textView = findViewById(R.id.textView);
         textView.setText(listPeople.get(0).getEmail());
         Log.d("LIST_PEOPLE", listPeople.get(0).getGender());
-
     }
 }

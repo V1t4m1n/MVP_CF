@@ -6,7 +6,7 @@ public class PeopleScreenBuilder {
     private PeopleScreenContract.MainModel mainModel;
     private PeopleScreenContract.MainView mainView;
 
-    public class Builder {
+    public static class Builder {
         private PeopleScreenBuilder builder;
 
         public Builder () {
@@ -27,9 +27,9 @@ public class PeopleScreenBuilder {
             this.builder.mainModel = model;
             return this;
         }
-    }
 
-    public static PeopleScreenBuilder build() {
-        return new PeopleScreenBuilder();
+        public static PeopleScreenBuilder build() {
+            return new PeopleScreenBuilder();
+        }
     }
 }
