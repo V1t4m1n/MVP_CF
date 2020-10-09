@@ -24,10 +24,11 @@ public class PeopleScreenPresenter implements PeopleScreenContract.MainPresenter
         this.postScreenModel = mainModel;
     }
 
-    public PeopleScreenPresenter (PeopleScreenContract.MainModel mainModel, PeopleScreenContract.MainView mainActivity) {
+    public PeopleScreenPresenter (PeopleScreenContract.MainView mainActivity, PeopleScreenContract.MainModel mainModel) {
         Log.d(TAG, "PeopleScreenPresenter()");
-        this.postScreenModel = mainModel;
         this.postScreenActivityView = mainActivity;
+        this.postScreenModel = mainModel;
+
     }
 
 

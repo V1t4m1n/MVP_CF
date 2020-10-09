@@ -1,10 +1,15 @@
 package ua.vitamin.app.people_screen;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.parse.Parse;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.List;
 
@@ -14,12 +19,15 @@ import ua.vitamin.app.utils.Result;
 public class PostScreenActivity extends AppCompatActivity implements PeopleScreenContract.MainView {
 
     private PeopleScreenContract.MainPresenter mainPresenter;
+    private PeopleScreenContract.MainModel mainModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mainPresenter = new PeopleScreenPresenter(this);
+        mainModel = new PostScreenModel();
+        mainPresenter = new PeopleScreenPresenter(this, mainModel);
+
     }
 
     @Override
