@@ -28,7 +28,6 @@ public class PeopleScreenPresenter implements PeopleScreenContract.MainPresenter
         Log.d(TAG, "PeopleScreenPresenter()");
         this.postScreenActivityView = mainActivity;
         this.postScreenModel = mainModel;
-
     }
 
 

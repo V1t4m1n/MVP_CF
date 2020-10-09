@@ -19,14 +19,12 @@ import ua.vitamin.app.utils.Result;
 public class PostScreenActivity extends AppCompatActivity implements PeopleScreenContract.MainView {
 
     private PeopleScreenContract.MainPresenter mainPresenter;
-    private PeopleScreenContract.MainModel mainModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mainModel = new PostScreenModel();
-        mainPresenter = new PeopleScreenPresenter(this, mainModel);
+        mainPresenter = new PeopleScreenPresenter(this, new PostScreenModel());
 
     }
 
