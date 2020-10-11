@@ -8,28 +8,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
-import ua.vitamin.app.utils.Result;
+import ua.vitamin.app.utils.Results;
 import ua.vitamin.redditapp.R;
 
 public class PostScreenActivity extends AppCompatActivity implements PeopleScreenContract.MainView {
 
-    private PeopleScreenContract.MainPresenter mainPresenter;
+    private PeopleScreenContract.MainPresenter peopleScreenPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mainPresenter = new PeopleScreenPresenter(this, new PostScreenModel());
+        peopleScreenPresenter = new PeopleScreenPresenter(this, new PostScreenModel());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mainPresenter.onPostListLoad();
+        peopleScreenPresenter.onPostListLoad();
     }
 
     @Override
-    public void onShowListPeople(List<Result> listPeople) {
+    public void onShowListPeople(List<Results> listPeople) {
         TextView textView = findViewById(R.id.textView);
         textView.setText(listPeople.get(0).getEmail());
         Log.d("LIST_PEOPLE", listPeople.get(0).getGender());

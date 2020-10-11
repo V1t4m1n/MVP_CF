@@ -4,7 +4,7 @@ package ua.vitamin.app.utils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result {
+public class Results {
 
     @SerializedName("gender")
     @Expose

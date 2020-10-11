@@ -8,5 +8,5 @@ import java.util.List;
 public class User {
     @SerializedName("result")
     @Expose
-    public List <Result> results;
+    public List <Results> results;
 }

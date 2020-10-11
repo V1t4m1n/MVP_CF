@@ -2,6 +2,7 @@ package ua.vitamin.app.people_screen;
 
 import android.util.Log;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import retrofit2.Call;
@@ -14,10 +15,8 @@ import ua.vitamin.app.utils.User;
 
 public class PostScreenModel implements PeopleScreenContract.MainModel {
 
-   private User peopleList;
-
     @Override
-    public CompletableFuture<User> fetchPeopleList() {
+    public CompletableFuture<Result<User>> fetchPeopleList() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://randomuser.me/")
@@ -25,23 +24,19 @@ public class PostScreenModel implements PeopleScreenContract.MainModel {
                 .build();
 
         RequestHandler handler = retrofit.create(RequestHandler.class);
-        Call<User> call = handler.getPeople();
+        CompletableFuture<Result<User>> future = new CompletableFuture();
+        handler.getPeople().enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                future.complete(Result.value(response.body()));
+            }
 
-        return CompletableFuture.supplyAsync(() -> {
-            call.enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call1, Response<User> response) {
-                    Log.d("PostScreenModel.loadPeople", "onResponse");
-                    peopleList = response.body();
-                }
-
-                @Override
-                public void onFailure(Call<User> call1, Throwable t) {
-                    Log.d("PostScreenModel.loadPeople", "onFailure");
-                    t.printStackTrace();
-                }
-            });
-            return peopleList;
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                future.complete(Result.throwable(t));
+            }
         });
+
+        return future;
     }
 }
